@@ -1,0 +1,20 @@
+[project]
+name = "karabiner-json-generator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "ishp_ctrin", email = "s26G1012DS@chibatech.ac.jp" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "pydantic>=2.13.5",
+    "pyyaml>=6.0.3",
+]
+
+[project.scripts]
+karabiner-json-generator = "karabiner_json_generator:main"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"
