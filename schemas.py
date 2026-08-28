@@ -1,4 +1,5 @@
 from typing import Literal
+from collections.abc import Iterable
 from pydantic import BaseModel, ConfigDict, Field
 
 Identifier = Literal[
@@ -19,7 +20,7 @@ Identifier = Literal[
 ]
 
 class Modifier(BaseModel):
-    optional: list[Identifier] | None = None
+    optional: Iterable[Identifier] | None = None
 
 class From(BaseModel):
     key_code: str
@@ -33,12 +34,12 @@ class Manipulator(BaseModel):
 
     type: Literal["basic"] = "basic"
     from_: From = Field(alias="from")
-    to: list[To]
+    to: Iterable[To]
 
 class Rule(BaseModel):
     description: str
-    manipulators: list[Manipulator]
+    manipulators: Iterable[Manipulator]
 
 class ComplexModifications(BaseModel):
     title: str
-    rules: list[Rule]
+    rules: Iterable[Rule]
