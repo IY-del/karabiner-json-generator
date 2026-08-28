@@ -3,6 +3,8 @@ import yaml
 from pydantic import BaseModel
 
 current_dir = Path.cwd()
+
+
 def load_yaml_files() -> dict:
     data = {}
     for yaml_path in [*current_dir.glob("*.yaml"), *current_dir.glob("*.yml")]:
@@ -13,6 +15,7 @@ def load_yaml_files() -> dict:
                 )
             data[yaml_path.stem] = yaml.safe_load(file)
     return data
+
 
 def write_json_file(model: BaseModel, name: str) -> Path:
     output_path = current_dir / f"{name}.json"

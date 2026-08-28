@@ -19,15 +19,19 @@ Identifier = Literal[
     "shift",
 ]
 
+
 class Modifier(BaseModel):
     optional: Iterable[Identifier] | None = None
+
 
 class From(BaseModel):
     key_code: str
     modifiers: Modifier | None = None
 
+
 class To(BaseModel):
     key_code: str
+
 
 class Manipulator(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
@@ -36,9 +40,11 @@ class Manipulator(BaseModel):
     from_: From = Field(alias="from")
     to: Iterable[To]
 
+
 class Rule(BaseModel):
     description: str
     manipulators: Iterable[Manipulator]
+
 
 class ComplexModifications(BaseModel):
     title: str
