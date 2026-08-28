@@ -1,6 +1,6 @@
 from typing import TypeIs
 
-from schemas import (
+from karabiner_json_generator.schemas import (
     ComplexModifications,
     From,
     Manipulator,
