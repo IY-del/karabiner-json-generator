@@ -39,10 +39,10 @@ def parse_layout(name: str, mappings: RawMappings) -> ComplexModifications:
                                 optional=["shift", "caps_lock"],
                             ),
                         ),
-                        to=tuple(
+                        to=(
                             To(
                                 key_code=to_key,
-                            )
+                            ),
                         ),
                     )
                     for from_key, to_key in mapping.items()
