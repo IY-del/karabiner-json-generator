@@ -6,35 +6,34 @@ import typer
 from karabiner_json_generator.config_io import load_yaml_files, write_json_file
 from karabiner_json_generator.parse import parse_layout
 
-app = typer.Typer(no_args_is_help=True)
+app = typer.Typer()
 
 
 @app.command()
 def generate(
     input_path: Annotated[
-        Path,
+        Path | None,
         typer.Argument(
-            exists=True,
-            readable=True,
-            help="YAML ファイル、または YAML を含むディレクトリ",
+            help="YAML ファイル、または YAML を含むディレクトリ。省略時はカレントディレクトリ",
         ),
-    ],
+    ] = None,
     output_dir: Annotated[
         Path | None,
         typer.Option(
             "--output-dir",
             "-o",
-            help="生成先ディレクトリ。省略時は入力ファイルと同じ場所",
+            help="生成先ディレクトリ。省略時は入力側と同じ場所",
         ),
     ] = None,
     check: Annotated[
         bool,
         typer.Option(
             "--check",
-            help="JSON を書き込まず、入力の検証だけを行う",
+            help="JSON を書き込まず検証のみ行う",
         ),
     ] = False,
 ) -> None:
+    input_path = (input_path or Path.cwd()).resolve()
     yaml_files = load_yaml_files(input_path)
 
     for yaml_path, mapping in yaml_files.items():
@@ -51,3 +50,7 @@ def generate(
             name=yaml_path.stem,
         )
         typer.echo(f"written: {written_path}")
+
+
+if __name__ == "__main__":
+    app()
