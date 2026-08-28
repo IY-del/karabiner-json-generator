@@ -1,5 +1,6 @@
-from typing import Literal
 from collections.abc import Iterable
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field
 
 Identifier = Literal[
